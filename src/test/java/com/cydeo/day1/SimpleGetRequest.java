@@ -1,4 +1,4 @@
-package com.cydeo.Day1;
+package com.cydeo.day1;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -14,8 +14,10 @@ public class SimpleGetRequest {
         //send a request and save response inside the response object
         Response response = RestAssured.get(url);
 
+        //print response status code
         System.out.println(response.statusCode());
 
+        //print response body
         response.prettyPrint();
 
     }
