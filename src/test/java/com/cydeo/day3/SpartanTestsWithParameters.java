@@ -55,7 +55,7 @@ public class SpartanTestsWithParameters {
         And "Not Found" message should be in response payload
      */
 
-        Response response = given().
+        Response response = given().log().all().
                                 accept(ContentType.JSON).
                                     and().pathParam("id",500).
                                         when().
@@ -64,6 +64,37 @@ public class SpartanTestsWithParameters {
         assertEquals(404, response.statusCode());
         assertEquals("application/json", response.contentType());
         assertTrue(response.body().asString().contains("Not Found"));
+
+
+    }
+
+
+    @Test
+    public void test3(){
+
+        /*
+        Given accept type is Json
+        And query parameter values are:
+        gender|Female
+        nameContains|e
+        When user sends GET request to /api/spartans/search
+        Then response status code should be 200
+        And response content-type: application/json
+        And "Female" should be in response payload
+        And "Janette" should be in response payload
+     */
+
+        Response response = given().log().all().
+                accept(ContentType.JSON).
+                queryParam("nameContains", "e").
+                queryParam("gender", "female").
+                when().
+                get("/api/spartans/search");
+
+        assertEquals(200,response.statusCode());
+        assertEquals("application/json", response.contentType());
+        assertTrue(response.body().asString().contains("Female"));
+        assertTrue(response.body().asString().contains("Janette"));
 
 
     }
