@@ -1,8 +1,13 @@
 package com.cydeo.day5;
 
 import com.cydeo.utilities.SpartanTestBase;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -14,11 +19,45 @@ public class JSONtoJAVATest extends SpartanTestBase {
     @Test
     public void oneSpartanToMap(){
 
+        Response response = given().pathParam("id",15).
+                            when().get("api/spartans/{id}").
+                            then().statusCode(200).extract().response();
+
+        //get the Json and convert it to the map
+
+        Map<String, Object> jsonMap = response.as(Map.class);
+        //System.out.println(jsonMap.toString());
+
+        String actualName = (String) jsonMap.get("name");
+        assertThat(actualName,is("Meta"));
+
+        //When you Run the @Test, will be failed.
+        //java.lang.IllegalStateException: Cannot parse object because no JSON deserializer found in classpath.
+        // Please put either Jackson (Databind) or Gson in the classpath.
+        //Deserialization ==> JSON To JAVA
+        //Jackson or Gson ==> those are libraries to deserialization and serialization.
+        // They are also known as objectMapper,jsonParser, dataBinding libraries.
+        // we added jackson (Databind) library to our pom.xml to deserialize
+    }
 
 
+    @DisplayName("GET all spartans to JAVA data structure")
+    @Test
+    public void getAllSpartan(){
 
+        Response response = get("/api/spartans").then().statusCode(200).extract().response();
 
+        //we need to convert json to java which is deserialized
+
+        List<Map<String, Object>> jsonList = response.as(List.class);
+        System.out.println(jsonList.get(1).get("name"));
+
+        Map<String, Object> spartan3 = jsonList.get(2);
+        System.out.println(spartan3);
 
 
     }
+
+
+
 }
