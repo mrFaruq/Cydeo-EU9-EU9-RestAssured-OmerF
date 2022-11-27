@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ORDSApiWithJsonPath extends HRTestBase {
 
-    @DisplayName("GER request to Countries")
+    @DisplayName("GET request to Countries")
     @Test
     public void test1(){
 
