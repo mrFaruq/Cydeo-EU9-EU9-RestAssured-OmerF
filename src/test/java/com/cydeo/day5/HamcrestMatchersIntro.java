@@ -78,9 +78,13 @@ public class HamcrestMatchersIntro {
 
         List<Integer> listOfNumbers = Arrays.asList(1,4,5,6,32,54,66,77,45,23);
 
+        //check size of list
         assertThat(listOfNumbers,hasSize(10));
+        //check if this list hasItem
         assertThat(listOfNumbers,hasItem(77));
+        //check if this list hasItems 77,54,23
         assertThat(listOfNumbers,hasItems(77,54,23));
+        //check if all numbers greater than 0
         assertThat(listOfNumbers,everyItem((greaterThan(0))));
     }
 }
