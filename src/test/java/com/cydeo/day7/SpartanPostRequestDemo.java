@@ -121,7 +121,7 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
     @DisplayName("POST with Map to Spartan Class")
     @Test
     public void postMethod4(){
-        //this example we implement serialization with creatin spartan object sending as a request body
+        //this example we implement serialization with creating spartan object sending as a request body
         //also implemented deserialization getting the id,sending get request and saving that body as a response
 
         //create one object from your pojo, send it as a JSON
@@ -161,7 +161,7 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
 
     //Create one SpartanUtil class
     //create a static method that returns Map<String,Object>
-    //use faker library(add as a depedency) to assign each time different information
+    //use faker library(add as a dependency) to assign each time different information
     //for name,gender,phone number
     //then use your method for creating spartan as a map,dynamically.
 
